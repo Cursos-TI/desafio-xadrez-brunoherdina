@@ -8,6 +8,8 @@
 #define MOVIMENTO_BISPO 5
 #define MOVIMENTO_TORRE 5
 #define MOVIMENTO_RAINHA 8
+#define MOVIMENTO_CAVALO_VERTICAL 2    // Movimento vertical do cavalo (L)
+#define MOVIMENTO_CAVALO_HORIZONTAL 1  // Movimento horizontal do cavalo (L)
 
 int main() {
     int i;
@@ -28,6 +30,21 @@ int main() {
     printf("\nMovimentação da Rainha - Esquerda:\n");
     for (i = 1; i <= MOVIMENTO_RAINHA; i++) {
         printf("Movimento %d: Esquerda\n", i);
+    }
+
+    // Movimentação do Cavalo (em L - para baixo e para a esquerda)
+    printf("\nMovimentação do Cavalo - Em L (Baixo e Esquerda):\n");
+    int movimento = 1;
+    for (i = 1; i <= 1; i++) {
+        int j = 1;
+        // Primeiro movimento: vertical (para baixo)
+        do {
+            printf("Passo %d: Baixo\n", j);
+            j++;
+        } while (j <= MOVIMENTO_CAVALO_VERTICAL);
+        
+        // Segundo movimento: horizontal (para a esquerda)
+        printf("Passo %d: Esquerda\n", j);
     }
 
     // Nível Aventureiro - Movimentação do Cavalo
