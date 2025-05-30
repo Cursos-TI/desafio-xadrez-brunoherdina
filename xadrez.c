@@ -11,52 +11,84 @@
 #define MOVIMENTO_CAVALO_VERTICAL 2    // Movimento vertical do cavalo (L)
 #define MOVIMENTO_CAVALO_HORIZONTAL 1  // Movimento horizontal do cavalo (L)
 
+// Função recursiva para movimentação da Torre
+void moverTorre(int casasRestantes) {
+    if (casasRestantes <= 0) return;
+    
+    printf("Direita\n");
+    moverTorre(casasRestantes - 1);
+}
+
+// Função recursiva para movimentação do Bispo
+void moverBispoRecursivo(int casasRestantes) {
+    if (casasRestantes <= 0) return;
+    
+    printf("Direita e Cima\n");
+    moverBispoRecursivo(casasRestantes - 1);
+}
+
+// Função com loops aninhados para movimentação do Bispo
+void moverBispoLoops(int casas) {
+    printf("\nMovimentação do Bispo com Loops Aninhados:\n");
+    // Loop externo para movimento vertical
+    for (int vertical = 1; vertical <= casas; vertical++) {
+        // Loop interno para movimento horizontal
+        for (int horizontal = 1; horizontal <= 1; horizontal++) {
+            printf("Movimento %d: ", vertical);
+            printf("Direita e Cima\n");
+        }
+    }
+}
+
+// Função recursiva para movimentação da Rainha
+void moverRainha(int casasRestantes) {
+    if (casasRestantes <= 0) return;
+    
+    printf("Esquerda\n");
+    moverRainha(casasRestantes - 1);
+}
+
 int main() {
-    int i;
+    // Movimentação da Torre (recursiva)
+    printf("\nMovimentação da Torre - Recursiva:\n");
+    moverTorre(MOVIMENTO_TORRE);
     
-    // Movimentação do Bispo (5 casas na diagonal superior direita)
-    printf("\nMovimentação do Bispo - Diagonal Superior Direita:\n");
-    for (i = 1; i <= MOVIMENTO_BISPO; i++) {
-        printf("Movimento %d: Direita e Cima\n", i);
-    }
+    // Movimentação do Bispo (recursiva)
+    printf("\nMovimentação do Bispo - Recursiva:\n");
+    moverBispoRecursivo(MOVIMENTO_BISPO);
     
-    // Movimentação da Torre (5 casas para a direita)
-    printf("\nMovimentação da Torre - Direita:\n");
-    for (i = 1; i <= MOVIMENTO_TORRE; i++) {
-        printf("Movimento %d: Direita\n", i);
-    }
+    // Movimentação do Bispo (loops aninhados)
+    moverBispoLoops(MOVIMENTO_BISPO);
     
-    // Movimentação da Rainha (8 casas para a esquerda)
-    printf("\nMovimentação da Rainha - Esquerda:\n");
-    for (i = 1; i <= MOVIMENTO_RAINHA; i++) {
-        printf("Movimento %d: Esquerda\n", i);
-    }
-
-    // Movimentação do Cavalo (em L - para baixo e para a esquerda)
-    printf("\nMovimentação do Cavalo - Em L (Baixo e Esquerda):\n");
-    int movimento = 1;
-    for (i = 1; i <= 1; i++) {
-        int j = 1;
-        // Primeiro movimento: vertical (para baixo)
-        do {
-            printf("Passo %d: Baixo\n", j);
-            j++;
-        } while (j <= MOVIMENTO_CAVALO_VERTICAL);
+    // Movimentação da Rainha (recursiva)
+    printf("\nMovimentação da Rainha - Recursiva:\n");
+    moverRainha(MOVIMENTO_RAINHA);
+    
+    // Movimentação do Cavalo (loops complexos - duas casas para cima e uma para direita)
+    printf("\nMovimentação do Cavalo - Em L (Cima e Direita):\n");
+    
+    // Loop externo para controlar o movimento completo em L
+    for (int movimento = 1; movimento <= 1; movimento++) {
+        int passos_vertical = 0;
+        int passos_horizontal = 0;
         
-        // Segundo movimento: horizontal (para a esquerda)
-        printf("Passo %d: Esquerda\n", j);
+        // Loop para movimento vertical (para cima)
+        while (passos_vertical < MOVIMENTO_CAVALO_VERTICAL) {
+            printf("Cima\n");
+            passos_vertical++;
+            
+            // Se ainda não completou o movimento vertical, continua
+            if (passos_vertical < MOVIMENTO_CAVALO_VERTICAL) {
+                continue;
+            }
+            
+            // Após completar o movimento vertical, move para direita
+            if (passos_horizontal < MOVIMENTO_CAVALO_HORIZONTAL) {
+                printf("Direita\n");
+                passos_horizontal++;
+            }
+        }
     }
-
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
-
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
-
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
 
     return 0;
 }
